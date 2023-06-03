@@ -3,7 +3,6 @@ import { handleSubmit, createHtml, displayNoResult } from '../movieApp';
 import { getData } from '../services/movieservice';
 import { IMovie } from '../models/Movie';
 
-// Mock axios get method and provide a sample response
 jest.mock('../services/movieservice');
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -30,7 +29,7 @@ const mockResponse = {
 mockedAxios.get.mockResolvedValue(mockResponse);
 
 describe('movieApp functions', () => {
-  test('handleSubmit calls getData with the correct search text', async () => {
+  test('handleSubmit kallar på getData med korrekt data', async () => {
     // Mock the DOM elements
     document.body.innerHTML = `
       <form id="searchForm">
@@ -48,7 +47,7 @@ describe('movieApp functions', () => {
   
 
   describe("createHtml", () => {
-    test("creates the HTML elements correctly", () => {
+    test("Skapa THML", () => {
       const movies: IMovie[] = [
         {
           Title: "Movie 1",
@@ -69,10 +68,8 @@ describe('movieApp functions', () => {
   
       createHtml(movies, container);
   
-      // Verify that the container has the correct number of child elements
       expect(container.children.length).toBe(2);
   
-      // Verify that the child elements are created correctly
       expect(container.children[0].tagName).toBe("DIV");
       expect(container.children[0].classList.contains("movie")).toBe(true);
       expect(container.children[0].querySelector("h3")?.innerHTML).toBe("Movie 1");
@@ -95,15 +92,13 @@ describe('movieApp functions', () => {
     });
   });
   
-  test('displayNoResult displays the "No search results" message', () => {
+  test('displayNoResult visar "No search results" message', () => {
     const container = document.createElement('div');
 
     displayNoResult(container);
 
-    // Verify that the container has the correct child element
     expect(container.children.length).toBe(1);
 
-    // Verify that the child element is created correctly
     expect(container.children[0].tagName).toBe('P');
     expect(container.innerHTML).toContain('Inga sökresultat att visa');
   });
